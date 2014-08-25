@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pubquiz</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{BASE_TAG}}
+
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/pubquiz.css">
+  </head>
+  <body>
+    <script>
+      window.PubquizENV = {{ENV}};
+      window.EmberENV = window.PubquizENV.EmberENV;
+    </script>
+    <script src="assets/vendor.js"></script>
+    <script src="assets/pubquiz.js"></script>
+    <script>
+      window.Pubquiz = require('pubquiz/app')['default'].create(PubquizENV.APP);
+    </script>
+  </body>
+</html>
