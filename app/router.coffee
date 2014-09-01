@@ -3,7 +3,8 @@
 Router = Ember.Router.extend
   location: PubquizENV.locationType
 
-Router.map =>
+Router.map ->
+  @route('nearby-quizzes')
 
 
 `export default Router`
