@@ -9,7 +9,7 @@ PhonegapHelperService = Ember.Object.extend
     @doConditionalPGAction =>
       navigator.notification.vibrate(millis)
 
-  doFBLogin: (loginPromise) ->
+  doFBLogin: ->
     promiseFunc = (resolve, reject) =>
       fbLoginFunc = =>
         try
