@@ -11,8 +11,17 @@
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/pubquiz.css">
+
+      <!--phonegap stuff -->
+      <script src='cordova.js'></script>
+      <script src='cdv-plugin-fb-connect.js'></script>
+      <script src='facebook-js-sdk.js'></script>
+
+      <script src="assets/app_init.js"></script>
+
   </head>
-  <body>
+
+  <body onload="init();">
     <script>
       window.PubquizENV = {{ENV}};
       window.EmberENV = window.PubquizENV.EmberENV;

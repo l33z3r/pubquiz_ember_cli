@@ -1,8 +1,9 @@
 `import Ember from 'ember'`
+`import Constants from '../utils/constants'`
 
 PhonegapHelperService = Ember.Object.extend
   getMe: ->
-    "Me"
+    "#{Constants.get('apiBaseURL')}Me"
 
   vibrate: (millis) ->
     @doConditionalPGAction =>
@@ -32,12 +33,29 @@ PhonegapHelperService = Ember.Object.extend
           FB.login(responseFunc, scopes)
 
         catch e
-          console.log("Error loggin into FB: " + e)
+          console.log("Error logging into FB: " + e)
           reject()
 
       @doConditionalPGAction(fbLoginFunc)
 
     new Ember.RSVP.Promise(promiseFunc)
+
+  scanBarcode: (callback) ->
+    func = =>
+      successFunc = (result) =>
+        alert("We got a barcode\n" +
+        "Result: " + result.text + "\n" +
+        "Format: " + result.format + "\n" +
+        "Cancelled: " + result.cancelled)
+
+        callback.call(@, result.text)
+
+      errorFunc = (error) =>
+        alert("Scanning failed: " + error);
+
+      cordova.plugins.barcodeScanner.scan(successFunc, errorFunc)
+
+    @doConditionalPGAction(func)
 
   doConditionalPGAction: (func) ->
     if cordova? or Phonegap? or phonegap?
