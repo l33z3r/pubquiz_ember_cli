@@ -24,9 +24,7 @@ ApplicationController = Ember.Controller.extend
       p = @get('phonegapHelperService').doFBLogin()
 
       success = (authToken) =>
-        alert("Success1")
         GlobalVars.set('fbAuthToken', authToken)
-        alert("Success")
 
         console.log("Stored access token, logging into rails")
 
