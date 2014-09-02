@@ -24,14 +24,16 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.RAILS_API_SERVER_URL = "http://192.168.1.15:3000"
   }
 
   if (environment === 'test') {
-
+    ENV.RAILS_API_SERVER_URL = "http://192.168.1.15:3000"
   }
 
   if (environment === 'production') {
-
+    ENV.RAILS_API_SERVER_URL = "http://www.tablequiz.com"
   }
 
   return ENV;

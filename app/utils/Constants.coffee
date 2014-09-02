@@ -1,5 +1,5 @@
 Constants = Ember.Object.create
-  apiBaseURL: "http://localhost:3000"
+  apiBaseURL: window.PubquizENV.RAILS_API_SERVER_URL
 
   a: "AISHERE"
 
