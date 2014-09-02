@@ -6,7 +6,7 @@ ApplicationController = Ember.Controller.extend
   a: "b"
 
   iamhere: Ember.computed ->
-    Constants.get('apiBaseURL') + @get('phonegapHelperService').getMe()
+    Constants.get('apiBaseURL') + @get('railsApiService').getMe() + @get('phonegapHelperService').getMe()
   .property('bla')
 
   actions:
