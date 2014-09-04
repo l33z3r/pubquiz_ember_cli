@@ -8,7 +8,7 @@ Router.map ->
   @route 'join_quizz_options'
   @route 'quizz_id_input'
 
-  @resource 'teams', ->
+  @resource 'teams', { path: '/teams_for_event/:quizz_event_id' }, ->
     @route 'new'
 
   @resource 'quizz_events', ->
@@ -19,5 +19,6 @@ Router.map ->
           @resource 'questions', ->
             @resource 'question', { path: ':question_id' }, ->
               @resource 'answers'
+  @route 'application'
 
 `export default Router`

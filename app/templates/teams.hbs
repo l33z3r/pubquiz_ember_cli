@@ -1,3 +1,12 @@
 Teams
 
+<ul>
+    {{#each}}
+        <li>
+            <a {{action 'team_selected' this}}>{{name}}</a>
+        </li>
+    {{/each}}
+</ul>
+
+</br>
 {{outlet}}
