@@ -40,7 +40,11 @@ PhonegapHelperService = Ember.Object.extend
 
     new Ember.RSVP.Promise(promiseFunc)
 
-  scanBarcode: (callback) ->
+  scanBarcode: (callback, context) ->
+#    #TODO: remove this, it is only for testing on web browser
+#    callback.call(context, "zzz");
+#    return
+
     func = =>
       successFunc = (result) =>
         alert("We got a barcode\n" +
@@ -48,7 +52,7 @@ PhonegapHelperService = Ember.Object.extend
         "Format: " + result.format + "\n" +
         "Cancelled: " + result.cancelled)
 
-        callback.call(@, result.text)
+        callback.call(context, result.text)
 
       errorFunc = (error) =>
         alert("Scanning failed: " + error);
