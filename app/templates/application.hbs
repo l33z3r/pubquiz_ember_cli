@@ -1,10 +1,18 @@
-<h2 id='title'>PubQuiz</h2>
-{{iamhere}}
+<!--<h2 id='title'>PubQuiz</h2>-->
+<!--{{iamhere}}-->
 
-<button {{action 'vibrate'}}>Vibrate</button>
-<button {{action 'doFBLogin'}}>FB Login</button>
-<button {{action 'scanBarcode'}}>Scan Barcode</button>
+<!--<button {{action 'vibrate'}}>Vibrate</button>-->
+<!--<button {{action 'doFBLogin'}}>FB Login</button>-->
+<!--<button {{action 'scanBarcode'}}>Scan Barcode</button>-->
 
-{{outlet}}
+<nav class='navbar navbar-default navbar-fixed-top' role='navigation'>
+    <div class='container-fluid'>
+        <div class='navbar-header'>
+            {{link-to 'TableQuizz' 'index' class="navbar-brand"}}
+        </div>
+    </div>
+</nav>
 
-
+<div class="container-fluid" id="main_container">
+    {{outlet}}
+</div>

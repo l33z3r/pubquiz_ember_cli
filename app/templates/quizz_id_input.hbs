@@ -1,0 +1,10 @@
+<form role="form">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Enter Quizz ID:</label>
+        {{ input value=quizzID class="form-control" placeholder="Example: aBCXyZ" }}
+    </div>
+
+    <button {{action 'goToQuizz'}} type="button" class="btn btn-success btn-lg btn-block">
+        Go To Quizz
+    </button>
+</form>

@@ -18,4 +18,7 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 app.import('vendor/bootstrap/dist/css/bootstrap.css');
 
+//mock ajax
+app.import( 'bower_components/jquery-mockjax/jquery.mockjax.js' );
+
 module.exports = app.toTree();
