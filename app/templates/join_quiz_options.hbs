@@ -6,7 +6,9 @@
 
 <div class="row-fluid">
     <div class="col-md-12">
-        {{link-to 'Quizzes Near Me' 'quiz_events.nearby' class="btn btn-success btn-lg btn-block"}}
+        <button {{action 'quizzesNearMe'}} type="button" class="btn btn-success btn-lg btn-block">
+            Quizzes Near Me
+        </button>
 
         <button {{action 'scanQuizIDQRCode'}} type="button" class="btn btn-primary btn-lg btn-block">
             Scan A Quiz QR Code

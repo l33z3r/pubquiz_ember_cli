@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 QuizEvents = Ember.Route.extend
-  model: ->
+  model: (params) ->
     @store.findAll('quiz-event')
 
 `export default QuizEvents`

@@ -11,7 +11,10 @@ PhonegapHelperService = Ember.Object.extend
 
   doFBLogin: ->
     promiseFunc = (resolve, reject) =>
-      fbLoginFunc = =>
+      if !@havePhoneGap()
+        console.log("mocking FB Login with access token XXX")
+        resolve("XXX")
+      else
         try
           responseFunc = (response) =>
             if response.status is'connected'
@@ -30,13 +33,14 @@ PhonegapHelperService = Ember.Object.extend
           console.log("Error logging into FB: " + e)
           reject()
 
-      @doConditionalPGAction(fbLoginFunc)
-
     new Ember.RSVP.Promise(promiseFunc)
 
   getFBLoginStatus: ->
     promiseFunc = (resolve, reject) =>
-      fbLoginFunc = =>
+      if !@havePhonegap()
+        console.log("mocking login status as true")
+        resolve(true)
+      else
         try
           FB.init
             cookie:true,
@@ -53,22 +57,22 @@ PhonegapHelperService = Ember.Object.extend
           console.log("Error getting login status from FB: " + e)
           reject()
 
-      @doConditionalPGAction(fbLoginFunc)
-
     new Ember.RSVP.Promise(promiseFunc)
 
   doCurlTransition: (callback) ->
-    func = =>
+    if !@havePhonegap()
+      console.log("skipping curl transition as in browser")
+
+      if callback?
+        callback.call()
+    else
       nativetransitions.curl(0.5, "down", callback)
 
-    @doConditionalPGAction(func)
-
   scanBarcode: (callback, context) ->
-#    #TODO: remove this, it is only for testing on web browser
-#    callback.call(context, "zzz");
-#    return
-
-    func = =>
+    if !@havePhonegap()
+      console.log("mocking barcode scan with value zzz")
+      callback.call(context, "zzz")
+    else
       successFunc = (result) =>
         console.log("We got a barcode\n" +
         "Result: " + result.text + "\n" +
@@ -82,17 +86,35 @@ PhonegapHelperService = Ember.Object.extend
 
       cordova.plugins.barcodeScanner.scan(successFunc, errorFunc)
 
-    @doConditionalPGAction(func)
-
-  doConditionalPGAction: (func) ->
-    if cordova? or Phonegap? or phonegap?
-      try
-        func.call()
-      catch e
-        console.log("Error running phonegap code " + e)
+  getGeoLoc: (callback, context) ->
+    if !@havePhonegap()
+      console.log("mocking geo loc with location Dublin (51.5033630,-0.1276250)")
+      callback.call(context, [51.5033630,-0.1276250])
     else
-      msg = "Phonegap lib not available"
-      console.log(msg)
-      alert(msg)
+      onSuccess = (position) =>
+        console.log('Latitude: '          + position.coords.latitude          + '\n' +
+          'Longitude: '         + position.coords.longitude         + '\n' +
+          'Altitude: '          + position.coords.altitude          + '\n' +
+          'Accuracy: '          + position.coords.accuracy          + '\n' +
+          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+          'Heading: '           + position.coords.heading           + '\n' +
+          'Speed: '             + position.coords.speed             + '\n' +
+          'Timestamp: '         + position.timestamp                + '\n')
+
+        x = position.coords.longitude
+        y = position.coords.latitude
+
+        callback.call([x, y])
+
+      onError = (error) =>
+        alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n')
+
+        callback.call(null)
+
+      navigator.geolocation.getCurrentPosition(onSuccess, onError)
+
+  havePhonegap: ->
+    cordova? or Phonegap? or phonegap?
 
 `export default PhonegapHelperService`

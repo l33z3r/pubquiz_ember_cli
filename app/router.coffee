@@ -12,7 +12,7 @@ Router.map ->
     @route 'new'
 
   @resource 'quiz_events', ->
-    @route 'nearby'
+    @route 'nearby', { path: '/:x/:y' }
     @resource 'quiz_event', { path: ':quiz_event_id' }, ->
       @resource 'quiz-rounds', ->
         @resource 'quiz-round', { path: ':quiz_round_id' }, ->
