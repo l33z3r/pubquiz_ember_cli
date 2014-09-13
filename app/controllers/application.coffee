@@ -9,36 +9,4 @@ ApplicationController = Ember.Controller.extend
     Constants.get('apiBaseURL') + @get('railsApiService').getMe() + @get('phonegapHelperService').getMe()
   .property('bla')
 
-  actions:
-    vibrate: ->
-      @get('phonegapHelperService').vibrate(3000)
-
-    scanBarcode: ->
-      func = (val) ->
-        alert("Val: " + val)
-        @get('phonegapHelperService').vibrate(1000)
-
-      @get('phonegapHelperService').scanBarcode(func)
-
-    doFBLogin: ->
-      p = @get('phonegapHelperService').doFBLogin()
-
-      railsAPIService = @get('railsApiService')
-
-      success = (authToken) =>
-        GlobalVars.set('fbAuthToken', authToken)
-
-        console.log("Stored access token, logging into rails")
-
-        alert(railsAPIService)
-
-        railsAPIService.doRailsLogin(authToken)
-
-        alert("after")
-
-      failure = =>
-        alert("Fail")
-
-      p.then(success, failure)
-
 `export default ApplicationController`

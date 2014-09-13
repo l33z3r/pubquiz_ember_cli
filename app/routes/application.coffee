@@ -2,7 +2,10 @@
 
 ApplicationRoute = Ember.Route.extend
   setupController: (controller, model) ->
-    p = this.store.find('quizz_event', "q1");
+    sa = this.store.createRecord('submitted_answer', {id: 1, bla: "bla"})
+    sa.save()
+
+    p = this.store.find('quiz-event', "q1")
 
     success = (qe) ->
       console.log("Found test record: #{qe.get('name')}")
@@ -10,6 +13,6 @@ ApplicationRoute = Ember.Route.extend
     fail = =>
       console.log("Error finding test record")
 
-    p.then(success, fail);
+    p.then(success, fail)
 
 `export default ApplicationRoute`

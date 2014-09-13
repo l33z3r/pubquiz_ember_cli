@@ -5,53 +5,53 @@ MockjaxInitializer =
   initialize: () ->
     # app.register 'route', 'foo', 'service:foo'
 
-    #/api/quizz_events
+    #/api/quiz_events
     #
     #
     #
 
-    mockedQuizzEvents = []
+    mockedQuizEvents = []
 
-    mockedQuizzEvents.push
+    mockedQuizEvents.push
       id: "q1"
-      name: "Quizz 1"
+      name: "Quiz 1"
       startTime: new Date()
 
-    mockedQuizzEvents.push
+    mockedQuizEvents.push
       id: "q2"
-      name: "Quizz 2"
+      name: "Quiz 2"
       startTime: new Date()
 
-    mockedQuizzEvents.push
+    mockedQuizEvents.push
       id: "q3"
-      name: "Quizz 3"
+      name: "Quiz 3"
       startTime: new Date()
 
     $.mockjax
-      url: /\/api\/quizz_events$/,
+      url: /\/api\/quiz_events$/,
       response: ->
-        @responseText = JSON.stringify({"quizz_events" : mockedQuizzEvents})
+        @responseText = JSON.stringify({"quiz_events" : mockedQuizEvents})
 
 
-    #/api/quizz_event/:quizz_event_id
+    #/api/quiz_event/:quiz_event_id
     #
     #
     #
 
     $.mockjax
-      url: /\/api\/quizz_events\/(.*)$/,
-      urlParams: ['quizz_event_id']
+      url: /\/api\/quiz_events\/(.*)$/,
+      urlParams: ['quiz_event_id']
       response: (settings) ->
-        mockedQuizzEvent =
-          id: "q#{settings.urlParams.quizz_event_id}"
-          name: "Quizz #{settings.urlParams.quizz_event_id}"
+        mockedQuizEvent =
+          id: "q#{settings.urlParams.quiz_event_id}"
+          name: "Quiz #{settings.urlParams.quiz_event_id}"
           startTime: new Date()
 
-        @responseText = JSON.stringify({"quizz_event" : mockedQuizzEvent})
+        @responseText = JSON.stringify({"quiz_event" : mockedQuizEvent})
 
 
 
-    #/api/teams?quizz_event_id=q2
+    #/api/teams?quiz_event_id=q2
     #
     #
     #

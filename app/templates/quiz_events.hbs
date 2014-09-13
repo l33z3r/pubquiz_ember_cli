@@ -1,0 +1,12 @@
+Quiz Events
+
+<ul>
+    {{#each}}
+        <li>
+            <a {{action 'quiz_event_selected' this}} href="#">{{name}} - {{startTime}}</a>
+        </li>
+    {{/each}}
+</ul>
+
+</br>
+{{outlet}}

@@ -13,12 +13,6 @@ PhonegapHelperService = Ember.Object.extend
     promiseFunc = (resolve, reject) =>
       fbLoginFunc = =>
         try
-          FB.init
-            cookie:true,
-            appId: "339202539580669",
-            nativeInterface: CDV.FB,
-            useCachedDialogs: false
-
           responseFunc = (response) =>
             if response.status is'connected'
               console.log('logged in, got access token: ' + response.authResponse.accessToken)
@@ -40,6 +34,35 @@ PhonegapHelperService = Ember.Object.extend
 
     new Ember.RSVP.Promise(promiseFunc)
 
+  getFBLoginStatus: ->
+    FB.init
+      cookie:true,
+      appId: "339202539580669",
+      nativeInterface: CDV.FB,
+      useCachedDialogs: false
+
+    promiseFunc = (resolve, reject) =>
+      fbLoginFunc = =>
+        try
+          FB.getLoginStatus (response) =>
+            if response.status is 'connected'
+              resolve(true)
+            else
+              resolve(false)
+        catch e
+          console.log("Error getting login status from FB: " + e)
+          reject()
+
+      @doConditionalPGAction(fbLoginFunc)
+
+    new Ember.RSVP.Promise(promiseFunc)
+
+  doCurlTransition: (callback) ->
+    func = =>
+      nativetransitions.curl(0.5, "down", callback)
+
+    @doConditionalPGAction(func)
+
   scanBarcode: (callback, context) ->
 #    #TODO: remove this, it is only for testing on web browser
 #    callback.call(context, "zzz");
@@ -47,7 +70,7 @@ PhonegapHelperService = Ember.Object.extend
 
     func = =>
       successFunc = (result) =>
-        alert("We got a barcode\n" +
+        console.log("We got a barcode\n" +
         "Result: " + result.text + "\n" +
         "Format: " + result.format + "\n" +
         "Cancelled: " + result.cancelled)

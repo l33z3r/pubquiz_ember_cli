@@ -1,6 +1,17 @@
 <div class="row-fluid">
     <div class="col-md-12">
-        <h3>Welcome To TableQuizz</h2>
-            {{link-to 'Join A Quizz' 'join_quizz_options' class="btn btn-success btn-lg btn-block"}}
+        <h3>Welcome To TableQuiz</h2>
+
+        <button {{action 'joinQuiz'}} type="button" class="btn btn-success btn-lg btn-block">
+            Join A Quiz TRN
+        </button>
+
+        <button {{action 'doFBLogin'}} type="button" class="btn btn-primary btn-lg btn-block">
+            Log In With Facebook
+        </button>
+
+        <button {{action 'vibrate'}} type="button" class="btn btn-default btn-lg btn-block">
+            Vibrate
+        </button>
     </div>
 </div>

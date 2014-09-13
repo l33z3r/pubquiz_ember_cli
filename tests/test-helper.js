@@ -1,5 +1,6 @@
 import resolver from './helpers/resolver';
 import { setResolver } from 'ember-qunit';
+import customHelper from './helpers/first_custom_helper';
 
 setResolver(resolver);
 

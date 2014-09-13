@@ -18,6 +18,9 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 app.import('vendor/bootstrap/dist/css/bootstrap.css');
 
+//local storage adapter for ember data
+app.import("bower_components/ember-localstorage-adapter/localstorage_adapter.js");
+
 //mock ajax
 app.import( 'bower_components/jquery-mockjax/jquery.mockjax.js' );
 

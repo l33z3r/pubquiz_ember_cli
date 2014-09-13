@@ -5,17 +5,17 @@ Router = Ember.Router.extend
 
 Router.map ->
   @route 'landing'
-  @route 'join_quizz_options'
-  @route 'quizz_id_input'
+  @route 'join_quiz_options'
+  @route 'quiz_id_input'
 
-  @resource 'teams', { path: '/teams_for_event/:quizz_event_id' }, ->
+  @resource 'teams', { path: '/teams_for_event/:quiz_event_id' }, ->
     @route 'new'
 
-  @resource 'quizz_events', ->
+  @resource 'quiz_events', ->
     @route 'nearby'
-    @resource 'quizz_event', { path: ':quizz_event_id' }, ->
-      @resource 'rounds', ->
-        @resource 'round', { path: ':round_id' }, ->
+    @resource 'quiz_event', { path: ':quiz_event_id' }, ->
+      @resource 'quiz-rounds', ->
+        @resource 'quiz-round', { path: ':quiz_round_id' }, ->
           @resource 'questions', ->
             @resource 'question', { path: ':question_id' }, ->
               @resource 'answers'

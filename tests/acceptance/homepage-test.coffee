@@ -15,3 +15,6 @@ test 'visiting /homepage', ->
 
   andThen ->
     equal currentPath(), 'index'
+
+  andThen ->
+    firstCustomHelper('.clickme', 1)
