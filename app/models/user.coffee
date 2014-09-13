@@ -1,8 +1,9 @@
 `import DS from 'ember-data'`
 
-User = DS.Model.extend {
+User = DS.Model.extend
   name: DS.attr()
-  current_quiz: DS.belongsTo('quiz-event')
-}
+  quiz_event: DS.belongsTo('quiz-event')
+
+  event_team_member: DS.belongsTo 'event-team-member'
 
 `export default User`

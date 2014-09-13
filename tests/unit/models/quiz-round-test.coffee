@@ -2,7 +2,7 @@
 
 moduleForModel 'quiz-round', 'QuizRound', {
 # Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:quiz-round-question', 'model:quiz-event']
 }
 
 test 'it exists', ->

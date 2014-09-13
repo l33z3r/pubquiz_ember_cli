@@ -35,15 +35,15 @@ PhonegapHelperService = Ember.Object.extend
     new Ember.RSVP.Promise(promiseFunc)
 
   getFBLoginStatus: ->
-    FB.init
-      cookie:true,
-      appId: "339202539580669",
-      nativeInterface: CDV.FB,
-      useCachedDialogs: false
-
     promiseFunc = (resolve, reject) =>
       fbLoginFunc = =>
         try
+          FB.init
+            cookie:true,
+            appId: "339202539580669",
+            nativeInterface: CDV.FB,
+            useCachedDialogs: false
+
           FB.getLoginStatus (response) =>
             if response.status is 'connected'
               resolve(true)

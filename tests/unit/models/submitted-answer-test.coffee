@@ -2,7 +2,7 @@
 
 moduleForModel 'submitted-answer', 'SubmittedAnswer', {
   # Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:event-team-member']
 }
 
 test 'it exists', ->
