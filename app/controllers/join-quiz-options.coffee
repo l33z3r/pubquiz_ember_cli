@@ -9,7 +9,7 @@ JoinQuizOptionsController = Ember.Controller.extend
     quizzesNearMe: ->
       func = (coords) =>
         alert(coords)
-        @transitionToRoute('quiz_events.nearby', coords[0], coords[1])
+        @transitionToRoute('quiz_events', coords[0], coords[1])
 
       @get('phonegapHelperService').getGeoLoc(func, @)
 
