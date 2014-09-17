@@ -1,12 +1,29 @@
-Teams
+<div id="choose_team">
+    <h1>
+        {{quizEventName}}
+    </h1>
 
-<ul>
+    <h3>
+        Please Choose A Team
+    </h3>
+
     {{#each}}
-        <li>
-            <a {{action 'team_selected' this}} href="#">{{name}}</a>
-        </li>
+        <button {{action 'team_selected' this}} type="button" class="btn btn-primary btn-lg btn-block">
+            {{name}}
+        </button>
     {{/each}}
-</ul>
 
-</br>
-{{outlet}}
+    <h3>
+        Or, Create One
+    </h3>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Enter Team Name:</label>
+        {{ input value=created_team_name class="form-control" placeholder="E.g. Team 1" }}
+    </div>
+
+    <button {{action 'create_team' this}} type="button" class="btn btn-success btn-lg btn-block">
+        Create Team
+    </button>
+
+</div>

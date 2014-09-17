@@ -4,9 +4,12 @@
 
 IndexController = Ember.Controller.extend
   needs: ["current-user"]
+  #queryParams: ["hello"]
 
   actions:
     joinQuiz: ->
+      #alert(@get('hello'))
+
       console.log("Current user is #{@get('controllers.current-user.model.name')}")
 
       p = @get('phonegapHelperService').getFBLoginStatus()

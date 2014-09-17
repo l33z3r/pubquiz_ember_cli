@@ -11,7 +11,7 @@ QuizEventsController = Ember.ArrayController.extend
 
       #set the qevent id in the teams controller
       #this is messy
-      @get('controllers.teams').set('quiz_event_id', qevent.get('id'))
+      @get('controllers.teams').set('current_quiz_event', qevent)
       @transitionToRoute('teams', qevent.get('id'))
 
 `export default QuizEventsController`

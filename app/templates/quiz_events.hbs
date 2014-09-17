@@ -1,12 +1,13 @@
-Quiz Events
+<div id="select_quiz_event">
+    <h3>
+        Select a Quiz Event Below
+    </h3>
 
-<ul>
     {{#each}}
-        <li>
-            <a {{action 'quiz_event_selected' this}} href="#">{{name}} - {{startTime}}</a>
-        </li>
+        <button {{action 'quiz_event_selected' this}} type="button" class="btn btn-primary btn-lg btn-block">
+            {{name}}
+        </button>
     {{/each}}
-</ul>
+</div>
 
-</br>
 {{outlet}}

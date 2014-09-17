@@ -13,10 +13,10 @@ QuizIdInputController = Ember.Controller.extend
         alert("Please enter a quiz ID")
         return
 
-      success = (record) =>
+      success = (qevent) =>
         #set the qevent id in the teams controller
         #this is messy
-        @get('controllers.teams').set('quzz_event_id', quizId)
+        @get('controllers.teams').set('current_quiz_event', qevent)
         @transitionToRoute('teams', quizId)
 
       fail = (bla) =>

@@ -2,10 +2,10 @@
 
 ApplicationRoute = Ember.Route.extend
   setupController: (controller, model) ->
-    sa = this.store.createRecord('submitted_answer', {id: 1, bla: "bla"})
+    sa = @store.createRecord('submitted_answer', {id: 1, bla: "bla"})
     sa.save()
 
-    p = this.store.find('quiz-event', "q1")
+    p = @store.find('quiz-event', "q1")
 
     success = (qe) ->
       console.log("Found test record: #{qe.get('name')}")

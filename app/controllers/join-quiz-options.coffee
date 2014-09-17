@@ -8,7 +8,7 @@ JoinQuizOptionsController = Ember.Controller.extend
   actions:
     quizzesNearMe: ->
       func = (coords) =>
-        alert(coords)
+        console.log("Going to events for location #{coords}")
         @transitionToRoute('quiz_events', coords[0], coords[1])
 
       @get('phonegapHelperService').getGeoLoc(func, @)
@@ -17,10 +17,10 @@ JoinQuizOptionsController = Ember.Controller.extend
       func = (quizId) ->
         console.log("!!!!!!Quiz Id: " + quizId)
 
-        success = (record) =>
+        success = (qevent) =>
           #set the qevent id in the teams controller
           #this is messy
-          @get('controllers.teams').set('quiz_event_id', quizId)
+          @get('controllers.teams').set('current_quiz_event', qevent)
           @transitionToRoute('teams', quizId)
 
         fail = (bla) =>
