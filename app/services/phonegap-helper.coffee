@@ -11,7 +11,7 @@ PhonegapHelperService = Ember.Object.extend
 
   doFBLogin: ->
     promiseFunc = (resolve, reject) =>
-      if !@havePhoneGap()
+      if !@havePhonegap()
         console.log("mocking FB Login with access token XXX")
         resolve("XXX")
       else
