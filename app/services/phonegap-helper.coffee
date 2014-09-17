@@ -104,7 +104,7 @@ PhonegapHelperService = Ember.Object.extend
         x = position.coords.longitude
         y = position.coords.latitude
 
-        callback.call([x, y])
+        callback.call(context, [x, y])
 
       onError = (error) =>
         alert('code: '    + error.code    + '\n' +
