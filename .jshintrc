@@ -3,7 +3,8 @@
     "document": true,
     "window": true,
     "-Promise": true,
-    "PubquizENV": true
+    "PubquizENV": true,
+    "Pusher": true
   },
   "browser" : true,
   "boss" : true,

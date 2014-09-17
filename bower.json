@@ -10,7 +10,9 @@
     "ember-cli-test-loader": "rwjblue/ember-cli-test-loader#0.0.4",
     "ember-load-initializers": "stefanpenner/ember-load-initializers#0.0.2",
     "jquery-mockjax": "appendto/jquery-mockjax#~1.5.4",
-    "ember-localstorage-adapter": "~0.4.0"
+    "ember-localstorage-adapter": "~0.4.0",
+    "ember-pusher": "jamiebikies/ember-pusher",
+    "pusher": "~2.2.3"
   },
   "devDependencies": {
     "bootstrap": "~3.2.0"

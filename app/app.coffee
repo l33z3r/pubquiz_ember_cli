@@ -8,6 +8,11 @@ App = Ember.Application.extend
   modulePrefix: 'pubquiz', # TODO: loaded via config
   Resolver: Resolver
 
+  #ember-pusher setup
+  PUSHER_OPTS:
+    key: 'e6bb42c17b827adbf664'
+    connection: {}
+    logAllEvents: true
 
 loadInitializers(App, 'pubquiz')
 

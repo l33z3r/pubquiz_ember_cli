@@ -24,4 +24,8 @@ app.import("bower_components/ember-localstorage-adapter/localstorage_adapter.js"
 //mock ajax
 app.import( 'bower_components/jquery-mockjax/jquery.mockjax.js' );
 
+//ember-pusher
+app.import('vendor/pusher/dist/pusher.js');
+app.import( 'bower_components/ember-pusher/ember-pusher.js' );
+
 module.exports = app.toTree();
