@@ -1,4 +1,6 @@
 `import Ember from 'ember'`
+`import Constants from '../utils/constants'`
+`import SettingsConstants from '../utils/settings-constants'`
 
 ApplicationRoute = Ember.Route.extend
   setupController: (controller, model) ->
@@ -14,5 +16,16 @@ ApplicationRoute = Ember.Route.extend
       console.log("Error finding test record")
 
     p.then(success, fail)
+
+    @store.find('setting', SettingsConstants.apiURLToUse).then null, (reason) =>
+      console.log("Creating setting record")
+      record = @store.recordForId('setting', SettingsConstants.apiURLToUse)
+      record.loadedData()
+
+      properties =
+        val: Constants.apiBaseURL
+
+      record.setProperties(properties)
+      record.save()
 
 `export default ApplicationRoute`
