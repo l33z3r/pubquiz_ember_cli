@@ -26,7 +26,7 @@ IndexController = Ember.Controller.extend
 
           @doFBLogin().then(success, failure)
 
-      failure = =>
+      failure = (f) =>
         alert("Fail get login status")
 
       p.then(success, failure)
@@ -45,27 +45,32 @@ IndexController = Ember.Controller.extend
     console.log("V4")
 
     promiseFunc = (resolve, reject) =>
-      p = @get('phonegapHelperService').doFBLogin()
+      try
+        p = @get('phonegapHelperService').doFBLogin()
 
-      railsAPIService = @get('railsApiService')
+        railsAPIService = @get('railsApiService')
 
-      success = (authToken) =>
-        GlobalVars.set('fbAuthToken', authToken)
+        success = (authToken) =>
+          GlobalVars.set('fbAuthToken', authToken)
 
-        console.log("Stored access token, logging into rails")
+          console.log("Stored access token, logging into rails")
 
-        alert(railsAPIService)
+          alert(railsAPIService)
 
-        railsAPIService.doRailsLogin(authToken)
+          railsAPIService.doRailsLogin(authToken)
 
-        alert("after")
-        resolve()
+          alert("after")
+          resolve()
 
-      failure = =>
-        alert("Fail")
+        failure = =>
+          alert("Fail")
+          reject()
+
+        p.then(success, failure)
+      catch e
+        console.error(e.stack)
+        console.log("Error in code to log in to fb: " + e)
         reject()
-
-      p.then(success, failure)
 
     new Ember.RSVP.Promise(promiseFunc)
 

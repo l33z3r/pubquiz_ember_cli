@@ -11,11 +11,11 @@ PhonegapHelperService = Ember.Object.extend
 
   doFBLogin: ->
     promiseFunc = (resolve, reject) =>
-      if !@havePhonegap()
-        console.log("mocking FB Login with access token XXX")
-        resolve("XXX")
-      else
-        try
+      try
+        if !@havePhonegap()
+          console.log("mocking FB Login with access token XXX")
+          resolve("XXX")
+        else
           responseFunc = (response) =>
             if response.status is'connected'
               console.log('logged in, got access token: ' + response.authResponse.accessToken)
@@ -28,20 +28,20 @@ PhonegapHelperService = Ember.Object.extend
             scope: "email,user_friends"
 
           FB.login(responseFunc, scopes)
-
-        catch e
-          console.log("Error logging into FB: " + e)
-          reject()
+      catch e
+        console.error(e.stack)
+        console.log("Error in code to log in to fb: " + e)
+        reject()
 
     new Ember.RSVP.Promise(promiseFunc)
 
   getFBLoginStatus: ->
     promiseFunc = (resolve, reject) =>
-      if !@havePhonegap()
-        console.log("mocking login status as true")
-        resolve(true)
-      else
-        try
+      try
+        if !@havePhonegap()
+          console.log("mocking login status as true")
+          resolve(true)
+        else
           FB.init
             cookie:true,
             appId: "339202539580669",
@@ -53,9 +53,10 @@ PhonegapHelperService = Ember.Object.extend
               resolve(true)
             else
               resolve(false)
-        catch e
-          console.log("Error getting login status from FB: " + e)
-          reject()
+      catch e
+        console.error(e.stack)
+        console.log("Error getting login status from FB: " + e)
+        reject()
 
     new Ember.RSVP.Promise(promiseFunc)
 
@@ -88,8 +89,20 @@ PhonegapHelperService = Ember.Object.extend
 
   getGeoLoc: (callback, context) ->
     if !@havePhonegap()
-      console.log("mocking geo loc with location Dublin (51.5033630,-0.1276250)")
-      callback.call(context, [51.5033630,-0.1276250])
+      if navigator.geolocation
+        console.log("getting browser coords as pg not available")
+
+        coordsCallback = (position) =>
+          x = position.coords.longitude
+          y = position.coords.latitude
+
+          console.log("got browser coords (#{x}, #{y})")
+          callback.call(context, [x, y])
+
+        navigator.geolocation.getCurrentPosition(coordsCallback)
+      else
+        console.log("mocking geo loc with location Dublin (51.5033630,-0.1276250)")
+        callback.call(context, [51.5033630,-0.1276250])
     else
       onSuccess = (position) =>
         console.log('Latitude: '          + position.coords.latitude          + '\n' +

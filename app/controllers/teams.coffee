@@ -23,6 +23,7 @@ TeamsController = Ember.ArrayController.extend
 
       teamDetails =
         name: created_team_name
+        quiz_event: @get('current_quiz_event')
 
       newTeam = @store.createRecord('team', teamDetails)
       #newTeam.save()
