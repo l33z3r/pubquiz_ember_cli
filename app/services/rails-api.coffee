@@ -2,16 +2,33 @@
 `import Constants from '../utils/constants'`
 
 RailsApiService = Ember.Object.extend
-  getMe: ->
-    "YESYSYSYSYSYSY"
 
   doRailsLogin: (accessToken) ->
-    alert("indorailslogin")
-    railsLoginURL = Constants.get('apiBaseURL') + "/auth/facebook/callback?access_token=" + accessToken
+    promiseFunc = (resolve, reject) =>
+      try
+        console.log("indorailslogin")
 
-    console.log("Logging into rails with URL: #{railsLoginURL}")
+        railsLoginURL = window.PubquizENV.RAILS_API_SERVER_URL + "/auth/facebook/callback?access_token=" + accessToken
 
-    $.get railsLoginURL, (r) =>
-      console.log("Login Rails returned " + r)
+        console.log("Logging into rails with URL: #{railsLoginURL}")
+
+        railsLoginSuccess = (res) =>
+          console.log("Login Rails success")
+          resolve()
+
+        railsLoginFailure = =>
+          reject()
+
+        $.ajax
+          url: railsLoginURL
+          success: railsLoginSuccess
+          fail: railsLoginFailure
+
+      catch e
+        console.error(e.stack)
+        console.log("Error logging into rails: " + e)
+        reject()
+
+    new Ember.RSVP.Promise(promiseFunc)
 
 `export default RailsApiService`

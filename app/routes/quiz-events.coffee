@@ -2,8 +2,8 @@
 
 QuizEvents = Ember.Route.extend
   model: (params) ->
-    if params.x and params.y
-      @store.find('quiz-event', {lat: params.x, long: params.y})
+    if params.lat and params.lon
+      @store.find('quiz-event', {lat: params.lat, lon: params.lon})
     else
       @store.findAll('quiz-event')
 

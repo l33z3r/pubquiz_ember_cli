@@ -25,7 +25,8 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
 
-    ENV.RAILS_API_SERVER_URL = "http://192.168.1.15:3000"
+    //proxy all xhr through ember cli
+    ENV.RAILS_API_SERVER_URL = "";
   }
 
   if (environment === 'test') {
@@ -33,7 +34,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.RAILS_API_SERVER_URL = "http://www.tablequiz.com"
+    //ENV.RAILS_API_SERVER_URL = "http://www.tablequiz.com"
+    ENV.RAILS_API_SERVER_URL = "http://192.168.1.15:3000"
   }
 
   return ENV;

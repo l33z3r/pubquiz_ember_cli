@@ -17,6 +17,7 @@ App = Ember.Application.extend
 loadInitializers(App, 'pubquiz')
 
 Ember.onerror = (e) =>
+  console.error(e.stack)
   debugger
 
 `export default App`

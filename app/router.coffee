@@ -10,7 +10,7 @@ Router.map ->
 
   @resource 'teams', { path: '/teams_for_event/:quiz_event_id' }
 
-  @resource 'quiz_events', { path: 'quiz_events/:x/:y' }
+  @resource 'quiz_events', { path: 'quiz_events/:lat/:lon' }
 
   @resource 'quiz_event', { path: '/quiz_event/:quiz_event_id' }, ->
     @route 'landing'
