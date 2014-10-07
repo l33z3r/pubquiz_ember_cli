@@ -30,10 +30,12 @@ ApplicationController = Ember.Controller.extend EmberPusher.Bindings,
             id: result.user.id
             name: result.user.name
             email: result.user.email
-            event_team_member: result.user.event_team_member
+            event_team_member: result.user.event_team_member_id
 
           user = @store.push('user', attributes)
           console.log("Current user is #{user.get('name')}")
+
+          @get('controllers.current-user').set('content', user)
 
           #load users current quiz
           if user.get('event_team_member')?

@@ -13,7 +13,7 @@ PhonegapHelperService = Ember.Object.extend
     promiseFunc = (resolve, reject) =>
       try
         if !@havePhonegap()
-          mockedAuthToken = "CAAE0gL7g7P0BAOuVTLD7b3GsH3aIVHbz3GBJsCZCFa0rA6BTNxN9W6fTXFl92XYZAmJzau1rwJ3ZCDbLVS6f1rsLZBJYHi2fHlifibIxoSk3b0OZBpjWS1LBguqdeJ5HGpo9sTXhcI12uRHUp9xmeTC5cNUnsW6tZBzyJiZA8oYQ7WBpA3Gy3iij61xtZBpbwB7BsvcZASHSqsSLbOmZBdH9vU"
+          mockedAuthToken = "CAAE0gL7g7P0BABfqgA3TEzvHpxOTZBqmwYHYySCcCLxvZB5atcckK22pDcYjrs8fwZBjHvsMT1NgTgozIxoOG6qt5SkF7aEiw9Hxtdb9gsBA6LjV3SZBlWqgi2yXvdxdgO2ixc7B3DvErBucA2eqr9Ng28nmvyAwQwf3awuFaXoNkyN675Y5w4PO7OUNATnE1eOohyOiq5BBSbQFFD9K"
           console.log("mocking FB Login with access token #{mockedAuthToken}")
           resolve(mockedAuthToken)
         else
@@ -44,7 +44,7 @@ PhonegapHelperService = Ember.Object.extend
 
           if mockLoginAsTrue
             console.log("mocking login status as true")
-            mockedAuthToken = "CAAE0gL7g7P0BAOuVTLD7b3GsH3aIVHbz3GBJsCZCFa0rA6BTNxN9W6fTXFl92XYZAmJzau1rwJ3ZCDbLVS6f1rsLZBJYHi2fHlifibIxoSk3b0OZBpjWS1LBguqdeJ5HGpo9sTXhcI12uRHUp9xmeTC5cNUnsW6tZBzyJiZA8oYQ7WBpA3Gy3iij61xtZBpbwB7BsvcZASHSqsSLbOmZBdH9vU"
+            mockedAuthToken = "CAAE0gL7g7P0BABfqgA3TEzvHpxOTZBqmwYHYySCcCLxvZB5atcckK22pDcYjrs8fwZBjHvsMT1NgTgozIxoOG6qt5SkF7aEiw9Hxtdb9gsBA6LjV3SZBlWqgi2yXvdxdgO2ixc7B3DvErBucA2eqr9Ng28nmvyAwQwf3awuFaXoNkyN675Y5w4PO7OUNATnE1eOohyOiq5BBSbQFFD9K"
             resolve(mockedAuthToken)
           else
             console.log("mocking login status as false")
