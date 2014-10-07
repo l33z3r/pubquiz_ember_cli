@@ -13,7 +13,7 @@ PhonegapHelperService = Ember.Object.extend
     promiseFunc = (resolve, reject) =>
       try
         if !@havePhonegap()
-          mockedAuthToken = "CAAE0gL7g7P0BABfqgA3TEzvHpxOTZBqmwYHYySCcCLxvZB5atcckK22pDcYjrs8fwZBjHvsMT1NgTgozIxoOG6qt5SkF7aEiw9Hxtdb9gsBA6LjV3SZBlWqgi2yXvdxdgO2ixc7B3DvErBucA2eqr9Ng28nmvyAwQwf3awuFaXoNkyN675Y5w4PO7OUNATnE1eOohyOiq5BBSbQFFD9K"
+          mockedAuthToken = "CAAE0gL7g7P0BAMLLOa42F2b9ZArndymuMC2ctux2hlsSH6saTY9Ogosi8DVe0tCml53KBvhGQ5xEyOrrAEGIPjkvZCP0AhMDRrwLNcZAPYCHBxJyi2hIP3RX2YhZCUd1egIdCS5kwFyRxErZCrTUUwdOmcyZBaan5qVa3tP6RZBlvvSqCzZBHYeBWfUtZBsorXN63SiO9ChZCf3PcvgbquiqI61A6pGqE4ll6Kes3JuYF99gZDZD"
           console.log("mocking FB Login with access token #{mockedAuthToken}")
           resolve(mockedAuthToken)
         else
@@ -44,23 +44,25 @@ PhonegapHelperService = Ember.Object.extend
 
           if mockLoginAsTrue
             console.log("mocking login status as true")
-            mockedAuthToken = "CAAE0gL7g7P0BABfqgA3TEzvHpxOTZBqmwYHYySCcCLxvZB5atcckK22pDcYjrs8fwZBjHvsMT1NgTgozIxoOG6qt5SkF7aEiw9Hxtdb9gsBA6LjV3SZBlWqgi2yXvdxdgO2ixc7B3DvErBucA2eqr9Ng28nmvyAwQwf3awuFaXoNkyN675Y5w4PO7OUNATnE1eOohyOiq5BBSbQFFD9K"
+            mockedAuthToken = "CAAE0gL7g7P0BAMLLOa42F2b9ZArndymuMC2ctux2hlsSH6saTY9Ogosi8DVe0tCml53KBvhGQ5xEyOrrAEGIPjkvZCP0AhMDRrwLNcZAPYCHBxJyi2hIP3RX2YhZCUd1egIdCS5kwFyRxErZCrTUUwdOmcyZBaan5qVa3tP6RZBlvvSqCzZBHYeBWfUtZBsorXN63SiO9ChZCf3PcvgbquiqI61A6pGqE4ll6Kes3JuYF99gZDZD"
             resolve(mockedAuthToken)
           else
             console.log("mocking login status as false")
             resolve(null)
         else
+          alert("init")
           FB.init
             cookie:true,
             appId: "339202539580669",
             nativeInterface: CDV.FB,
             useCachedDialogs: false
-
+          alert("after init")
           FB.getLoginStatus (response) =>
+            alert("got login resp #{response.status}")
             if response.status is 'connected'
-              resolve(true)
+              resolve(response.authResponse.accessToken)
             else
-              resolve(false)
+              resolve(null)
       catch e
         console.error(e.stack)
         console.log("Error getting login status from FB: " + e)
@@ -69,11 +71,12 @@ PhonegapHelperService = Ember.Object.extend
     new Ember.RSVP.Promise(promiseFunc)
 
   doCurlTransition: (callback) ->
-    if !@havePhonegap()
+    if !@havePhonegap() or device.platform isnt "iOS"
       console.log("skipping curl transition as in browser")
 
       if callback?
         callback.call()
+
     else
       nativetransitions.curl(0.5, "down", callback)
 

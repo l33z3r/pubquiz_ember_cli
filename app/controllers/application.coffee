@@ -84,14 +84,14 @@ ApplicationController = Ember.Controller.extend EmberPusher.Bindings,
             @doFBLogin().then(success, failure)
 
         failure = (f) =>
-          alert("Fail get login status")
+          alert("Fail get login status #{f}")
           reject()
 
         p.then(success, failure)
 
       catch e
         console.error(e.stack)
-        console.log("Error emsureing fb login: " + e)
+        console.log("Error emsuring fb login: " + e)
         reject()
 
     new Ember.RSVP.Promise(promiseFunc)
