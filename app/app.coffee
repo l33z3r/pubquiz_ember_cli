@@ -18,6 +18,9 @@ loadInitializers(App, 'pubquiz')
 
 Ember.onerror = (e) =>
   console.error(e.stack)
-  debugger
+
+  #report to qbaka
+  if qbaka?
+    qbaka.report(e)
 
 `export default App`
